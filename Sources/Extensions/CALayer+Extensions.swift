@@ -165,14 +165,14 @@ public extension CALayer {
 
 extension CALayer {
     func setOpacity(from: Int, to: Int, duration: TimeInterval, completion: (() -> Void)?) {
-        DispatchQueue.main.async { CATransaction.begin() }
+        CATransaction.begin()
         let animation = CABasicAnimation(keyPath: #keyPath(CALayer.opacity))
         animation.fromValue = from
         animation.toValue = to
         animation.duration = duration
         animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-        DispatchQueue.main.async { CATransaction.setCompletionBlock(completion) }
+        CATransaction.setCompletionBlock(completion)
         add(animation, forKey: "setOpacityAnimation")
-        DispatchQueue.main.async { CATransaction.commit() }
+        CATransaction.commit()
     }
 }
